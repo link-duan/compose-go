@@ -18,6 +18,7 @@ package types
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/docker/go-units"
 )
@@ -27,12 +28,14 @@ type UnitBytes int64
 
 // MarshalYAML makes UnitBytes implement yaml.Marshaller
 func (u UnitBytes) MarshalYAML() (interface{}, error) {
-	return fmt.Sprintf("%d", u), nil
+	t := strings.ToLower(units.BytesSize(float64(u)))
+	return t, nil
 }
 
 // MarshalJSON makes UnitBytes implement json.Marshaler
 func (u UnitBytes) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%d"`, u)), nil
+	t := strings.ToLower(units.BytesSize(float64(u)))
+	return []byte(fmt.Sprintf(`"%s"`, t)), nil
 }
 
 func (u *UnitBytes) DecodeMapstructure(value interface{}) error {

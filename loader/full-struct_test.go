@@ -706,10 +706,10 @@ services:
       resources:
         limits:
           cpus: 0.001
-          memory: "52428800"
+          memory: 50mib
         reservations:
           cpus: 0.0001
-          memory: "20971520"
+          memory: 20mib
           generic_resources:
             - discrete_resource_spec:
                 kind: gpu
@@ -974,7 +974,7 @@ services:
       - type: tmpfs
         target: /opt/tmpfs
         tmpfs:
-          size: "10000"
+          size: 9.766kib
     working_dir: /code
     x-bar: baz
     x-foo: bar
@@ -1292,11 +1292,11 @@ func fullExampleJSON(workingDir, homeDir string) string {
         "resources": {
           "limits": {
             "cpus": 0.001,
-            "memory": "52428800"
+            "memory": "50mib"
           },
           "reservations": {
             "cpus": 0.0001,
-            "memory": "20971520",
+            "memory": "20mib",
             "generic_resources": [
               {
                 "discrete_resource_spec": {
@@ -1675,7 +1675,7 @@ func fullExampleJSON(workingDir, homeDir string) string {
           "type": "tmpfs",
           "target": "/opt/tmpfs",
           "tmpfs": {
-            "size": "10000"
+            "size": "9.766kib"
           }
         }
       ],
