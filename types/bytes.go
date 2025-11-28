@@ -17,6 +17,7 @@
 package types
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -36,6 +37,16 @@ func (u UnitBytes) MarshalYAML() (interface{}, error) {
 func (u UnitBytes) MarshalJSON() ([]byte, error) {
 	t := strings.ToLower(units.BytesSize(float64(u)))
 	return []byte(fmt.Sprintf(`"%s"`, t)), nil
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (u *UnitBytes) UnmarshalJSON(b []byte) error {
+	var v string
+	err := json.Unmarshal(b, &v)
+	if err != nil {
+		return err
+	}
+	return u.DecodeMapstructure(v)
 }
 
 func (u *UnitBytes) DecodeMapstructure(value interface{}) error {
