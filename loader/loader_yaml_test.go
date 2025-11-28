@@ -38,6 +38,7 @@ services:
     image: foo
     command: echo hello
     init: true
+    mem_limit: 200m
 `),
 			},
 			{
@@ -59,9 +60,10 @@ services:
 	assert.DeepEqual(t, model, map[string]interface{}{
 		"services": map[string]interface{}{
 			"test": map[string]interface{}{
-				"image":   "bar",
-				"command": "echo world",
-				"init":    false,
+				"image":     "bar",
+				"command":   "echo world",
+				"init":      false,
+				"mem_limit": "200m",
 			},
 		},
 		"x-extension": map[string]interface{}{
